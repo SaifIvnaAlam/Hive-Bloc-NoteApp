@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_database/notemode.dart';
+import 'package:hive_database/pages.dart/notes_page.dart';
 
 import '../cubit/note_cubit.dart';
 
@@ -14,6 +15,7 @@ class HomePage extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = NoteCubit.get(context);
+        List<NoteModel>? noteList = [];
 
         return Scaffold(
           floatingActionButton: FloatingActionButton(
@@ -105,6 +107,11 @@ class HomePage extends StatelessWidget {
             },
             child: const Icon(Icons.add),
           ),
+          body: ListView.builder(
+              itemCount: noteList.length,
+              itemBuilder: (context, index) {
+                return TodoTile(noteModel: noteList[index]);
+              }),
         );
       },
     );
