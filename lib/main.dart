@@ -1,15 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_database/cubit/note_cubit.dart';
+import 'package:hive_database/notemode.dart';
 import 'package:hive_database/pages.dart/home_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
+const String noteBoxName = "notes";
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //path provider
   var directory = await getApplicationDocumentsDirectory();
+  //adding path to hive
   Hive.init(directory.path);
-  await Hive.openBox("notes");
-  runApp(App());
+  //inital hive for flutter
+  await Hive.initFlutter();
+  //opening hiveBox
+  await Hive.openBox(noteBoxName);
+  //register adapter
+  Hive.registerAdapter(NoteModelAdapter());
+
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
@@ -17,8 +29,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePage(),
+    return BlocProvider(
+      create: (context) => NoteCubit()..getBox(),
+      child: MaterialApp(
+        home: HomePage(),
+      ),
     );
   }
 }
