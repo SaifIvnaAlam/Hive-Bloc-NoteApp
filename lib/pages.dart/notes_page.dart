@@ -15,35 +15,6 @@ class TodoTile extends StatelessWidget {
         children: [
           Text(noteModel.title),
           const Spacer(),
-          IconButton(
-            onPressed: () {
-              cubit.updateTodo(NoteModel(
-                title: noteModel.title,
-                description: noteModel.description,
-              ));
-            },
-            icon: const Icon(Icons.arrow_back),
-            color: Colors.amber,
-          ),
-          IconButton(
-            onPressed: () {
-              cubit.updateTodo(NoteModel(
-                title: noteModel.title,
-                description: noteModel.description,
-              ));
-            },
-            icon: const Icon(Icons.done),
-            color: Colors.green,
-          ),
-          IconButton(
-            onPressed: () {
-              cubit.updateTodo(NoteModel(
-                title: noteModel.title,
-                description: noteModel.description,
-              ));
-            },
-            icon: const Icon(Icons.book),
-          )
         ],
       ),
       subtitle: Padding(
