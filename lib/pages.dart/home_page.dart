@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_database/notemode.dart';
 import 'package:hive_database/pages.dart/all_notes.dart';
-import 'package:hive_database/pages.dart/notes_page.dart';
+import 'package:hive_database/util/app_style.dart';
 
 import '../cubit/note_cubit.dart';
 
@@ -16,13 +16,13 @@ class HomePage extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = NoteCubit.get(context);
-        List<NoteModel>? noteList = [];
 
         return Scaffold(
             appBar: AppBar(
               title: Text(
-                "Notes",
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+                "NOTES",
+                style: kRobotoBold.copyWith(
+                    fontSize: 50, color: Colors.purpleAccent),
               ),
             ),
             floatingActionButton: FloatingActionButton(
@@ -114,7 +114,18 @@ class HomePage extends StatelessWidget {
               },
               child: const Icon(Icons.add),
             ),
-            body: AllTodosScreen());
+            body: Column(
+              children: const [
+                SizedBox(
+                  height: 10,
+                ),
+                Divider(
+                  height: 5,
+                  color: Colors.purpleAccent,
+                ),
+                AllTodosScreen(),
+              ],
+            ));
       },
     );
   }

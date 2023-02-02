@@ -35,7 +35,7 @@ class NoteCubit extends Cubit<NoteState> {
     emit(AddNoteState());
   }
 
-  updateTodo(NoteModel noteModel) async {
+  updateNote(NoteModel noteModel) async {
     await Hive.openBox<NoteModel>('todos').then((value) {
       final Map<dynamic, NoteModel> todoMap = value.toMap();
       dynamic desiredKey;

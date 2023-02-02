@@ -20,16 +20,18 @@ class AllTodosScreen extends StatelessWidget {
           ? const Center(
               child: Text('Todo list is empty.'),
             )
-          : MasonryGridView.count(
-              crossAxisCount: 2,
-              crossAxisSpacing: 4,
-              mainAxisSpacing: 4,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                return TodoTile(noteModel: noteList[index]);
-              },
-              itemCount: noteList.length,
-              shrinkWrap: true,
+          : SingleChildScrollView(
+              child: MasonryGridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 6,
+                mainAxisSpacing: 6,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  return NoteTile(noteModel: noteList[index]);
+                },
+                itemCount: noteList.length,
+                shrinkWrap: true,
+              ),
             );
     });
   }

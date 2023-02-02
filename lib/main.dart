@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_database/cubit/note_cubit.dart';
 import 'package:hive_database/notemode.dart';
 import 'package:hive_database/pages.dart/home_page.dart';
@@ -28,10 +30,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = GoogleFonts.robotoTextTheme();
     return BlocProvider(
       create: (context) => NoteCubit()..getBox(),
       child: MaterialApp(
-        theme: ThemeData(useMaterial3: true, brightness: Brightness.dark),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: true,
+          brightness: Brightness.dark,
+        ),
         home: HomePage(),
       ),
     );
