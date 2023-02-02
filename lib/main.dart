@@ -31,6 +31,7 @@ class App extends StatelessWidget {
     return BlocProvider(
       create: (context) => NoteCubit()..getBox(),
       child: MaterialApp(
+        theme: ThemeData(useMaterial3: true, brightness: Brightness.dark),
         home: HomePage(),
       ),
     );

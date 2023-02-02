@@ -19,12 +19,18 @@ class HomePage extends StatelessWidget {
         List<NoteModel>? noteList = [];
 
         return Scaffold(
+            appBar: AppBar(
+              title: Text(
+                "Notes",
+                style: TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+              ),
+            ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                          title: const Text('Todo Details'),
+                          title: const Text('Add Note'),
                           content: BlocBuilder<NoteCubit, NoteState>(
                             builder: (context, state) {
                               return Form(
@@ -94,7 +100,7 @@ class HomePage extends StatelessWidget {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(SnackBar(
                                       content: Text(
-                                          '${cubit.titleController.text} added'),
+                                          '${cubit.titleController.text} Added'),
                                       backgroundColor: Colors.green.shade500,
                                     ));
                                     Navigator.pop(context);

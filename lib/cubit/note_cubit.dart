@@ -53,4 +53,18 @@ class NoteCubit extends Cubit<NoteState> {
     descriptionController.clear();
     titleController.clear();
   }
+
+  deleteNote(NoteModel todoModel) async {
+    await Hive.openBox<NoteModel>('todos').then((value) {
+      final Map<dynamic, NoteModel> todoMap = value.toMap();
+      dynamic desiredKey;
+      todoMap.forEach((key, value) {
+        if (value.title == todoModel.title) {
+          desiredKey = key;
+        }
+      });
+      return value.delete(desiredKey);
+    }).then((value) => getBox());
+    emit(AddNoteState());
+  }
 }
